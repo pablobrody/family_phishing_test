@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Szkielet Projektu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            line-height: 1.5;
+            background-color: #d62828;   /* czerwone tło pierwszej strony */
+            color: #ffffff;
+            text-align: center;
+        }
+
+        /* Po przejściu na drugą stronę tło robi się jasne */
+        body.strona-2 {
+            background-color: #f2f2f2;
+            color: #222222;
+        }
+
+        #widok-1, #widok-2 {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ---------- STRONA 1 ---------- */
+        #obrazek-smutny {
+            width: 250px;           /* tu zmienisz wielkość obrazka */
+            margin: 20px 0;
+        }
+
+        #przycisk-dalej {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #138a3d;
+            border: 6px solid #00c853;      /* zielona obwódka */
+            border-radius: 20px;            /* zakrzywione rogi */
+            padding: 18px 70px;
+            cursor: pointer;
+        }
+
+        #przycisk-dalej:hover {
+            background-color: #0f7032;
+        }
+
+        /* ---------- STRONA 2 ---------- */
+        #krzyk {
+            font-size: 44px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #d62828;
+            margin: 10px 0 20px 0;
+        }
+
+        #obrazek-2 {
+            width: 300px;
+            margin: 10px 0;
+        }
+
+        #tekst-sredni {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        #tekst-duzy {
+            font-size: 18px;
+            text-align: left;
+            margin: 20px 0 30px 0;
+        }
+
+        /* ---------- QUIZ ---------- */
+        #quiz {
+            text-align: left;
+        }
+
+        .pytanie {
+            background-color: #ffffff;
+            border: 2px solid #999999;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .pytanie p {
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+
+        .pytanie button {
+            font-size: 16px;
+            padding: 6px 25px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .wynik-pytania {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .dobrze { color: #138a3d; }
+        .zle { color: #c0392b; }
+
+        .notka {
+            font-weight: normal;
+            color: #222222;
+        }
+
+        #wynik-koncowy {
+            display: none;
+            background-color: #ffffff;
+            border: 3px solid #222222;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #wynik-obrazek {
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= KROK 1: Ekran początkowy ================= -->
+    <div id="widok-1">
+        <h1>Niestety nie udało ci się przejść rodzinnego testu anty-phishingowego</h1>
+
+        <p><strong>Twoje IP:</strong> <span id="ip-miejsce">ładowanie...</span></p>
+        <p><strong>Twoje urządzenie (User-Agent):</strong> <span id="urzadzenie-miejsce"></span></p>
+
+        <!-- TEKST 1: dwa zdania, podmień na swoje -->
+        <p id="tekst-strona-1">
+            właśnie zdobyłem twoje ip, musisz bardziej uważać! Kliknij DALEJ aby dowiedzieć jak nie dać się więcej złapać
+        </p>
+
+        <!-- OBRAZEK 1: smutna twarz (plik w tym samym katalogu co kod) -->
+        <img id="obrazek-smutny" src="disappointed-face-emoji-clipart-lg.png" alt="Smutna twarz">
+
+        <br><br>
+        <button id="przycisk-dalej">DALEJ</button>
+    </div>
+
+    <!-- ================= KROK 2: Kolejna wersja (Quiz) ================= -->
+    <!-- Na start jest ukryty dzięki style="display: none;" -->
+    <div id="widok-2" style="display: none;">
+
+        <!-- TEKST 2: krzyczący, ok. 35 znaków -->
+        <h1 id="krzyk">NIEEEE.... Nigdy nie klkaj nic na podejrzanej stronie!</h1>
+
+        <!-- OBRAZEK 2 -->
+        <img id="obrazek-2" src="imagesadface1.png" alt="Smutna buzia">
+
+        <!-- TEKST 3: mniejszy, ok. 40 znaków -->
+        <p id="tekst-sredni">Właśnie pobrałem na twoim urządzeniu wirus. Koniecznie przeczytaj poniższe zasady bezpiecznego korzystania z sieci a na koniec rozwiąż krótki quiz.</p>
+
+        <!-- TEKST 4: duży, ok. 200 znaków -->
+        <div id="tekst-duzy">
+    <p>Kilka prostych zasad bezpieczeństwa w sieci
+    W internecie warto zachować ostrożność, nawet jeśli na pierwszy rzut oka wszystko wygląda normalnie. Oszuści coraz częściej podszywają się pod banki, firmy kurierskie, współpracowników, a nawet rodzinę czy znajomych. Wystarczy chwila nieuwagi, żeby stracić pieniądze lub dostęp do swojego konta. Na szczęście przestrzeganie kilku prostych zasad pozwala znacznie ograniczyć ryzyko.</p>
+   <p>1. Nie klikaj w podejrzane linki.Jeśli dostaniesz dziwną wiadomość z linkiem, nie otwieraj go bez zastanowienia. Dotyczy to również wiadomości od znajomych, rodziny czy współpracowników. Ich konta mogły zostać przejęte przez oszustów. Jeśli coś wydaje Ci się podejrzane, najlepiej skontaktuj się z nadawcą innym sposobem.</p>
+   <p>2. Uważaj na wiadomości, które wywołują presję.„Twoje konto zostanie zablokowane”, „Dopłać 2 zł do przesyłki” albo „Natychmiast potwierdź swoje dane”, takie komunikaty mają skłonić Cię do szybkiego działania. Nie podejmuj decyzji pod presją. Zatrzymaj się i sprawdź, czy wiadomość jest prawdziwa.</p>
+   <p>3. Jeśli trafisz na dziwną stronę, niczego na niej nie klikaj i ją zamknij.Nie pobieraj plików, nie zezwalaj na powiadomienia i nie wpisuj żadnych danych. Jeśli strona otworzyła się sama lub wygląda podejrzanie, najbezpieczniej ją zamknąć. Jeśli pojawi się komunikat, że komputer jest zainfekowany i trzeba zadzwonić pod podany numer, nie rób tego, może to być próba oszustwa.</p>
+   <p>4. Zawsze sprawdzaj, na jakiej stronie się znajdujesz.Oszuści tworzą strony łudząco podobne do prawdziwych stron banków, sklepów czy serwisów społecznościowych. Zwracaj uwagę na adres strony i literówki w nazwie domeny. Sama kłódka przy adresie nie oznacza, że strona jest bezpieczna. Jeśli chcesz zalogować się do banku lub innej ważnej usługi, najlepiej samodzielnie wpisz adres strony lub skorzystaj z oficjalnej aplikacji.</p>
+   <p>5. Nigdy nie podawaj haseł ani kodów w odpowiedzi na podejrzane wiadomości.Nie wysyłaj nikomu haseł, kodów SMS, kodów autoryzacyjnych ani kodów odzyskiwania konta. Bank, firma kurierska czy administrator IT nie powinni prosić Cię o przekazanie hasła lub kodu jednorazowego w wiadomości. Nie zatwierdzaj też logowania ani transakcji, których samodzielnie nie rozpocząłeś.</p>
+   <p>6. Nie otwieraj załączników bez zastanowienia.Nieoczekiwany rachunek, faktura, potwierdzenie zamówienia czy dokument od nieznanego nadawcy mogą zawierać złośliwe oprogramowanie. Nawet jeśli wiadomość wygląda profesjonalnie, sprawdź, czy rzeczywiście spodziewasz się takiego pliku.</p>
+   <p>7. Nie ufaj bezgranicznie temu, co widzisz na ekranie.Nazwa nadawcy, logo firmy, zdjęcie profilowe czy poprawna polszczyzna nie gwarantują, że wiadomość jest prawdziwa. Oszuści potrafią dobrze naśladować prawdziwe firmy i ludzi. Jeśli masz wątpliwości, sprawdź informację u źródła.</p>
+   <p>8. Używaj różnych, mocnych haseł.Nie ustawiaj jednego hasła do wszystkich kont. Jeśli ktoś pozna je w jednym serwisie, może spróbować zalogować się również do pozostałych. Najlepiej korzystać z menedżera haseł i włączyć uwierzytelnianie dwuskładnikowe wszędzie tam, gdzie jest dostępne.</p>
+   <p>9. Nie instaluj programów na prośbę nieznanej osoby.Jeśli ktoś zadzwoni i poprosi Cię o zainstalowanie programu do zdalnego dostępu, żeby „pomóc z komputerem” lub „zabezpieczyć konto”, zachowaj szczególną ostrożność. Nie udostępniaj nikomu zdalnego dostępu do swojego urządzenia bez potwierdzenia, że prośba jest autentyczna.</p>
+   <p>10. Jeśli popełnisz błąd, nie panikuj, działaj szybko.Jeśli klikniesz podejrzany link, nie oznacza to automatycznie, że ktoś uzyskał dostęp do Twojego urządzenia. Nie ignoruj jednak sytuacji. Jeśli podałeś hasło, zmień je, najlepiej z zaufanego urządzenia. Jeśli zatwierdziłeś podejrzaną transakcję lub przekazałeś dane bankowe, natychmiast skontaktuj się z bankiem. Podejrzane wiadomości zgłaszaj odpowiednim osobom lub działowi IT.</p>
+   <p>Najważniejsza zasada
+Jeśli coś budzi Twoje wątpliwości, zatrzymaj się i sprawdź, zanim klikniesz. Lepiej poświęcić minutę na sprawdzenie wiadomości niż później tracić czas na odzyskiwanie konta lub pieniędzy. Nie musisz znać się na informatyce, żeby zachować bezpieczeństwo wystarczy odrobina ostrożności i zdrowego rozsądku.</p>
+        </div>
+
+        <!-- QUIZ: pytania generuje skrypt na dole (tablica 'pytania') -->
+        <h2>Quiz</h2>
+        <div id="quiz"></div>
+
+        <!-- WYNIK KOŃCOWY: pokazuje się dopiero po odpowiedzi na wszystkie pytania -->
+        <div id="wynik-koncowy">
+            <h2 id="wynik-punkty"></h2>
+            <p id="wynik-tekst"></p>
+            <img id="wynik-obrazek" src="" alt="Wynik">
+        </div>
+    </div>
+
+
+    <script>
+        // 1. Automatyczne odczytanie danych o urządzeniu (User-Agent)
+        const miejsceUrzadzenia = document.getElementById('urzadzenie-miejsce');
+        miejsceUrzadzenia.innerText = navigator.userAgent;
+
+        // 2. Automatyczne pobranie IP użytkownika przez publiczne API
+        const miejsceIp = document.getElementById('ip-miejsce');
+
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                miejsceIp.innerText = data.ip;
+                // TUTAJ W PRZYSZŁOŚCI MOŻESZ WYSŁAĆ 'data.ip' i 'navigator.userAgent' do swojej bazy
+            })
+            .catch(error => {
+                miejsceIp.innerText = 'Nie udało się pobrać IP';
+            });
+
+        // 3. Obsługa kliknięcia przycisku DALEJ
+        const przyciskDalej = document.getElementById('przycisk-dalej');
+        const widok1 = document.getElementById('widok-1');
+        const widok2 = document.getElementById('widok-2');
+
+        przyciskDalej.addEventListener('click', () => {
+
+            // --- A. Automatyczne pobranie obrazka w tle (bez pokazywania na stronie) ---
+            // W zmiennej 'urlObrazka' wstawisz ścieżkę do swojego pliku (np. 'zdjecia/kot.jpg' lub zewnętrzny link)
+            const urlObrazka = 'bombelek.png';
+            const nazwaPliku = 'bombelek.png'; // pod jaką nazwą zapisze się u znajomego
+
+            const linkPobierania = document.createElement('a');
+            linkPobierania.href = urlObrazka;
+            linkPobierania.download = nazwaPliku;
+            linkPobierania.style.display = 'none'; // upewniamy się, że element jest niewidoczny
+
+            document.body.appendChild(linkPobierania);
+            linkPobierania.click(); // programowe kliknięcie wywołuje pobieranie pliku
+            document.body.removeChild(linkPobierania); // sprzątanie po elemencie
+
+            // --- B. Przejście do kolejnej wersji strony (ukrycie widoku 1, pokazanie widoku 2) ---
+            widok1.style.display = 'none';
+            widok2.style.display = 'block';
+            document.body.classList.add('strona-2'); // zmiana tła z czerwonego na jasne
+            window.scrollTo(0, 0);
+        });
+
+
+        // ================= QUIZ =================
+
+        // TUTAJ ZMIENIASZ PYTANIA:
+        // tresc = pytanie, poprawna = true (TAK) albo false (NIE), notka = wyjaśnienie
+        const pytania = [
+            { tresc: 'Pytanie 1: Czy wiadomość z podejrzanym linkiem można bezpiecznie otworzyć, jeśli została wysłana z konta znajomego?', poprawna: false,  notka: 'Konto znajomego mogło zostać przejęte przez oszusta. W razie wątpliwości skontaktuj się z nim innym sposobem.' },
+            { tresc: 'Pytanie 2: Czy symbol kłódki przy adresie strony oznacza, że można bezpiecznie podać na niej swoje dane?', poprawna: false, notka: 'Kłódka oznacza szyfrowane połączenie, ale nie gwarantuje, że strona należy do prawdziwej firmy.' },
+            { tresc: 'Pytanie 3: Czy jeśli przypadkowo klikniesz podejrzany link, ale nie podasz żadnych danych, powinieneś zachować ostrożność i sprawdzić, czy nie doszło do niczego niepokojącego?', poprawna: true,  notka: 'Notka 3: amo kliknięcie nie oznacza automatycznie zagrożenia, ale warto zamknąć podejrzaną stronę i zwrócić uwagę na ewentualne nietypowe zachowanie urządzenia.' },
+            { tresc: 'Pytanie 4: Czy przed kliknięciem linku warto sprawdzić adres strony, nawet jeśli wiadomość wygląda profesjonalnie i zawiera logo znanej firmy?', poprawna: true, notka: 'Logo i profesjonalny wygląd wiadomości można łatwo podrobić. Sprawdzenie adresu strony pomaga wykryć próbę oszustwa.' },
+            { tresc: 'Pytanie 5: Czy samo kliknięcie podejrzanego linku oznacza, że Twoje urządzenie zostało zainfekowane?', poprawna: false,  notka: 'Samo otwarcie linku nie oznacza automatycznie infekcji, ale nie należy ignorować zagrożenia ani wykonywać poleceń na podejrzanej stronie.' }
+        ];
+
+        // TUTAJ ZMIENIASZ WYNIKI KOŃCOWE (5 wersji):
+        // wynik 0-1 pkt -> wyniki[0], 2 pkt -> wyniki[1], 3 pkt -> wyniki[2], 4 pkt -> wyniki[3], 5 pkt -> wyniki[4]
+        const wyniki = [
+            { tekst: 'miernie. przeczytaj tekst jeszcze raz', obrazek: 'wynik1.png' },
+            { tekst: 'mogło być lepiej, bądź bardziej czujny',   obrazek: 'wynik2.png' },
+            { tekst: 'średnio. stać cię na więcej',   obrazek: 'wynik3.png' },
+            { tekst: 'całkiem nieźle, ale dalej bądź czujny!',   obrazek: 'wynik4.png' },
+            { tekst: 'ŚWIETNIE! wiesz co jest 5 w tym temacie',   obrazek: 'wynik5.png' }
+        ];
+
+        const quizKontener = document.getElementById('quiz');
+        let punkty = 0;
+        let odpowiedziane = 0;
+
+        // Budowanie pytań na stronie
+        pytania.forEach((p, numer) => {
+            const blok = document.createElement('div');
+            blok.className = 'pytanie';
+
+            const tekst = document.createElement('p');
+            tekst.innerText = p.tresc;
+
+            const przyciskTak = document.createElement('button');
+            przyciskTak.innerText = 'TAK';
+
+            const przyciskNie = document.createElement('button');
+            przyciskNie.innerText = 'NIE';
+
+            const wynikPytania = document.createElement('div');
+            wynikPytania.className = 'wynik-pytania';
+
+            // Obsługa odpowiedzi (od razu pokazuje dobrze/źle + notkę)
+            function odpowiedz(wybor) {
+                przyciskTak.disabled = true;   // po kliknięciu nie da się zmienić odpowiedzi
+                przyciskNie.disabled = true;
+
+                const dobrze = (wybor === p.poprawna);
+                if (dobrze) {
+                    punkty++;
+                    wynikPytania.innerHTML = '<span class="dobrze">Zaznaczyłeś dobrze!</span>';
+                } else {
+                    wynikPytania.innerHTML = '<span class="zle">Zaznaczyłeś źle!</span>';
+                }
+
+                const notka = document.createElement('div');
+                notka.className = 'notka';
+                notka.innerText = p.notka;
+                wynikPytania.appendChild(notka);
+
+                odpowiedziane++;
+                if (odpowiedziane === pytania.length) {
+                    pokazWynik();
+                }
+            }
+
+            przyciskTak.addEventListener('click', () => odpowiedz(true));
+            przyciskNie.addEventListener('click', () => odpowiedz(false));
+
+            blok.appendChild(tekst);
+            blok.appendChild(przyciskTak);
+            blok.appendChild(przyciskNie);
+            blok.appendChild(wynikPytania);
+            quizKontener.appendChild(blok);
+        });
+
+        // Pokazanie wyniku końcowego po ukończeniu quizu
+        function pokazWynik() {
+            let numerWyniku;
+            if (punkty <= 1) {
+                numerWyniku = 0;
+            } else {
+                numerWyniku = punkty - 1;
+            }
+
+            document.getElementById('wynik-punkty').innerText = 'Twój wynik: ' + punkty + ' / ' + pytania.length;
+            document.getElementById('wynik-tekst').innerText = wyniki[numerWyniku].tekst;
+            document.getElementById('wynik-obrazek').src = wyniki[numerWyniku].obrazek;
+
+            const ramka = document.getElementById('wynik-koncowy');
+            ramka.style.display = 'block';
+            ramka.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
